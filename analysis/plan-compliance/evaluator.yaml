@@ -1,0 +1,41 @@
+evaluator:
+  # Judge model selection (overridden by compute_next_step_plan_compliance.py based on target model):
+  # - deepseek-chat-v3-0324, gemini-2.5-flash: minimax/minimax-m3
+  # - minimax-m2.5: openai/gpt-5.2-codex
+  model:
+    model_name: "openai/gpt-5.2-codex"  # Default judge model
+    model_class: "openrouter"
+    model_kwargs:
+      temperature: 0.0
+    
+  prompt: |
+    You are a helpful evaluator that determines whether the next step follows the provided guidance.
+
+    Given:
+
+    <next_step>
+    Thought:
+    {THOUGHT}
+
+    Action:
+    {ACTION}
+    </next_step>
+
+    Determine whether the next step follows the guidance.
+
+    Judging criteria:
+    - Return True if the next step achieves or makes meaningful progress toward the goal of the guidance.
+    - Return True if the action advances the guidance even when some intermediate exploratory steps (e.g., review, inspect, identify, locate) are not explicitly performed, provided the thought shows they were already completed or are no longer necessary.
+    - For multi-step guidance, return True if the next step completes an earlier step or reasonably proceeds to a later step after the thought demonstrates sufficient understanding of the earlier steps.
+    - Return True if the action follows the intent of the guidance through a different but reasonable approach.
+    - Return False if the action directly contradicts the guidance, ignores the stated goal, repeats a problematic behavior the guidance is trying to correct, or pursues an unrelated objective.
+
+    Consider both thought and action together. The thought provides context for understanding whether exploratory work was done mentally before taking action.
+
+    Output exactly one word:
+
+    True
+
+    or
+
+    False

@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Resolution Transition Matrix comparing methods against Vanilla baseline. R$\rightarrow$U: baseline resolved only (regression), U$\rightarrow$R: config resolved only (improvement).}
+\label{tab:ru_transition}
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+\textbf{Dataset} & \textbf{Method} & \multicolumn{3}{c}{\textbf{R$\rightarrow$U $\downarrow$}} & \multicolumn{3}{c}{\textbf{U$\rightarrow$R $\uparrow$}} \\
+ &  & \textbf{DS} & \textbf{GF} & \textbf{MM} & \textbf{DS} & \textbf{GF} & \textbf{MM} \\
+\midrule
+\multirow{4}{*}{\textbf{SWE-bench Pro}} & SAGE & 26 & 12 & 22 & 19 & 28 & 16 \\
+ & Monitor-Only & 19 & 15 & 16 & 28 & 30 & 20 \\
+ & Periodic Advisor & 16 & 13 & 18 & 35 & 43 & 22 \\
+ & LivePlan & 3 & 3 & 10 & 35 & 39 & 23 \\
+\midrule
+\multirow{1}{*}{\textbf{SWE-bench Verified}} & LivePlan & 21 & 20 & 7 & 76 & 61 & 27 \\
+\bottomrule
+\end{tabular}
+\end{table}
